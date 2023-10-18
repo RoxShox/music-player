@@ -4,9 +4,6 @@ class AudioController {
 	constructor() {
 		this.audios = []
 		this.currentAudio = {}
-
-		this.initVizualizer = initVizualizer
-
 		this.audioList = document.querySelector(".items")
 		this.currentItem = document.querySelector(".current")
 		this.repeatButton = document.querySelector(".handling-repeat")
@@ -97,7 +94,6 @@ class AudioController {
 		!this.playing ? audio.play() : audio.pause()
 		this.playButton.classList.toggle("playing", !this.playing)
 		this.playing = !this.playing
-		this.visualizer.preparation(this.currentAudio.audio)
 	}
 
 	handleNext() {
@@ -140,13 +136,12 @@ class AudioController {
 		prev.addEventListener("click", this.handlePrev.bind(this))
 	}
 	setProgress(e) {
-		const width = e.target.clientWidth
-		const clickX = e.offsetX
+		const parent = e.target.closest(".progress")
+		const width = parent.clientWidth
+		const clickX = e.layerX
 		const duration = this.currentAudio.duration
 		const currentTime = (clickX / width) * duration
 		this.currentAudio.audio.currentTime = currentTime
-
-		console.log(this.currentAudio.audio.currentTime)
 	}
 	audioUpdateHandler({ audio, duration }) {
 		const progressCurent = document.querySelector(".progress-current")
