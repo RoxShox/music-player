@@ -1,3 +1,5 @@
+// Создание Музыкального визуализатора
+
 const columnsGap = 2
 const columnCount = 256 // Кол-во колонок: 1024, 512, 256, 128, 64
 
@@ -13,7 +15,6 @@ analyser.fftSize = columnCount
 source.connect(analyser) // Подключаем анализатор к элементу audio
 analyser.connect(audioCtx.destination) // Без этой строки нет звука, но анализатор работает.
 let frequencyData = new Uint8Array(analyser.frequencyBinCount)
-console.log(source)
 
 document.getElementById("player-btn").addEventListener("click", function () {
 	if (!this.classList.contains("play-btn__play")) {
